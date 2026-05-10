@@ -8,12 +8,14 @@ import ChatInterface from "@/components/ChatInterface";
 export default function Home() {
   const [sessionId, setSessionId] = useState(null);
   const [documentInfo, setDocumentInfo] = useState(null);
+  const [documentData, setDocumentData] = useState({ chunks: null, embeddings: null });
 
   const handleUploadComplete = (result) => {
     if (result === null) {
       // New document requested — reset
       setSessionId(null);
       setDocumentInfo(null);
+      setDocumentData({ chunks: null, embeddings: null });
       return;
     }
 
@@ -21,6 +23,10 @@ export default function Home() {
     setDocumentInfo({
       ...result.documentInfo,
       chunkCount: result.chunkCount,
+    });
+    setDocumentData({
+      chunks: result.chunks,
+      embeddings: result.embeddings,
     });
   };
 
@@ -35,6 +41,7 @@ export default function Home() {
         <ChatInterface
           sessionId={sessionId}
           hasDocument={!!documentInfo}
+          documentData={documentData}
         />
       </main>
     </div>

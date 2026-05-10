@@ -1,0 +1,5 @@
+The stateless architecture is a software design pattern where no session information is retained by the receiver, usually a server.
+
+Relevant data is sent to the receiver by the client in such a way that every packet of information transferred can be understood in isolation, without context information from previous packets in the session. This property of stateless architectures makes them ideal in high volume applications, increasing performance by removing server load caused by retention of session information.
+
+The most famous example of a stateless protocol is HTTP.

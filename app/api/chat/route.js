@@ -22,7 +22,7 @@ import { generateAnswer } from "@/lib/generator";
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { question, sessionId } = body;
+    const { question, sessionId, chunks, embeddings } = body;
 
     // Validate inputs
     if (!question || !question.trim()) {
@@ -39,8 +39,9 @@ export async function POST(request) {
       );
     }
 
-    // Check if documents exist for this session
-    if (!hasDocuments(sessionId)) {
+    // Check if documents exist (either provided statelessly or in session)
+    const hasStatelessData = chunks && chunks.length > 0 && embeddings && embeddings.length > 0;
+    if (!hasStatelessData && !hasDocuments(sessionId)) {
       return NextResponse.json(
         {
           error:
@@ -67,7 +68,7 @@ export async function POST(request) {
 
     // Step 2: Retrieve top-K most relevant chunks
     const topK = 5;
-    const relevantChunks = search(sessionId, queryEmbedding, topK);
+    const relevantChunks = search(sessionId, queryEmbedding, topK, chunks, embeddings);
     console.log(`[Chat] Retrieved ${relevantChunks.length} relevant chunks`);
 
     if (relevantChunks.length === 0) {

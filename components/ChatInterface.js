@@ -10,7 +10,7 @@ const SUGGESTIONS = [
   "Explain the most important concept",
 ];
 
-export default function ChatInterface({ sessionId, hasDocument }) {
+export default function ChatInterface({ sessionId, hasDocument, documentData }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +52,12 @@ export default function ChatInterface({ sessionId, hasDocument }) {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question, sessionId }),
+        body: JSON.stringify({ 
+          question, 
+          sessionId,
+          chunks: documentData?.chunks,
+          embeddings: documentData?.embeddings 
+        }),
       });
 
       const data = await response.json();

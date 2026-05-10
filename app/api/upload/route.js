@@ -109,6 +109,8 @@ export async function POST(request) {
         charCount: parsed.metadata.charCount,
       },
       chunkCount: chunks.length,
+      chunks: chunks,
+      embeddings: embeddings,
       message: `Successfully processed "${file.name}" into ${chunks.length} chunks.`,
     });
   } catch (error) {
