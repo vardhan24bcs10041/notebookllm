@@ -11,6 +11,10 @@
  */
 
 import { NextResponse } from "next/server";
+
+// Force Node.js runtime
+export const runtime = "nodejs";
+
 import { embedQuery } from "@/lib/embeddings";
 import { search, hasDocuments } from "@/lib/vectorStore";
 import { generateAnswer } from "@/lib/generator";

@@ -11,6 +11,10 @@
  */
 
 import { NextResponse } from "next/server";
+
+// Force Node.js runtime instead of Edge to ensure compatibility with pdf-parse and local modules
+export const runtime = "nodejs";
+
 import { parseDocument } from "@/lib/pdfParser";
 import { chunkDocument } from "@/lib/chunker";
 import { embedTexts } from "@/lib/embeddings";
