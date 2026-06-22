@@ -2,7 +2,7 @@
 
 A full-stack **RAG (Retrieval-Augmented Generation)** application inspired by Google NotebookLM. Upload any PDF or text document and have an AI-powered conversation grounded in its content.
 
-**Live Demo:** [Deployed on Vercel](#)  
+**Live Demo:** [https://notebookllm-nine.vercel.app/](#)  
 **Tech Stack:** Next.js 15 · Google Gemini AI · In-Memory Vector Store
 
 ![RAG Pipeline](https://img.shields.io/badge/RAG-Pipeline-8b5cf6?style=for-the-badge)
